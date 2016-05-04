@@ -3,16 +3,14 @@
    Initialiser for a python hack language assembler.
    -----------------------------------------------------------------------
    Written by: Samuel Pell 04-05-16 (dd-mm-yy)
+   Changed: 05-05-16 by Samuel Pell
    -----------------------------------------------------------------------
    Contains: main
-             get_file (temp)
-             output_file (temp)   
-   -----------------------------------------------------------------------          
-   Notes: File name entry to be replaced with a GUI version later.
+             get_file
+             output_file   
 """
 
 import HackTranslator
-import AssemblyCleaner
 
 
 def get_file(filename):
@@ -36,9 +34,8 @@ def main():
     output_filename = input("Enter the name of the file to output to:> ")
     try:
         input_file = get_file(input_filename)
-        cleaned_file = AssemblyCleaner.clean_file(input_file)
-        translated_file = HackTranslator.translate(cleaned_file)
-        output_file(output_filename, translated)        
+        translated_file = HackTranslator.translate(input_file)
+        output_file(output_filename, translated_file)        
     except FileNotFoundError:
         print("Error. Input file not found.")
     
