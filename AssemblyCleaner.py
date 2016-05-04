@@ -4,15 +4,17 @@
    translate it
    -----------------------------------------------------------------------
    Written by: Samuel Pell 04-05-16 (dd-mm-yy)
+   Changed: 05-05-16 by Samuel Pell
    -----------------------------------------------------------------------
    Contains: clean_file
-             _strip_non_instructions
              _strip_comments
              _strip_whitespace
              test_module
+             remove_psuedoinstructions
 """
 
 COMMENT_INDICATOR = "//"
+PSUEDOINSTRUCTION_INDICATOR = "("
 
 
 def clean_file(file_contents):
@@ -22,14 +24,8 @@ def clean_file(file_contents):
        cleaned lines.
     """
     commentless_file = _strip_comments(file_contents)
-    brackets_removed = _strip_non_instructions(commentless_file)
-    assembly_code = _remove_whitespace(brackets_removed)
+    assembly_code = _remove_whitespace(commentless_file)
     return assembly_code
-
-
-def _strip_non_instructions(file_contents):
-    """Removes all lines begining with open bracket"""
-    return [line for line in file_contents if not line.startswith("(")]
 
 
 def _remove_whitespace(file_contents):
@@ -45,12 +41,18 @@ def _strip_comments(file_contents):
     """Strips all the comments from a file"""
     lines_without_comments = []
     for line in file_contents:
-        comment_position = line.find(COMENT_INDICATOR)
+        comment_position = line.find(COMMENT_INDICATOR)
         if comment_position != -1:
             lines_without_comments.append(line[:comment_position])
         else:
             lines_without_comments.append(line)
     return lines_without_comments
+
+
+def remove_psuedoinstructions(file_contents):
+    """Removes all Psuedoinstruction from file"""
+    return [line for line in file_contents if not line.startswith(
+                                    PSUEDOINSTRUCTION_INDICATOR)]
 
 
 def test_module():
@@ -63,7 +65,7 @@ def test_module():
     print("--Original--")
     print(test_string)
     print("--Cleaned--")
-    print(clean_file(test_string))
+    print(remove_psuedoinstructions(clean_file(test_string)))
     
 
 if __name__ == "__main__":
