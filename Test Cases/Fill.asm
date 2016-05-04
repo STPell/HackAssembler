@@ -11,6 +11,7 @@
 // Put your code here.
 
 //Code by Samuel Pell 01-05-16 (dd-mm-yy)
+//Note: Will not run unless 16348 in MEM[0] and 24576 in MEM[1]
 (KEY)
 //RESET VARIABLES
 @0
