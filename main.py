@@ -40,5 +40,4 @@ def main():
         print("Error. Input file not found.")
     
     
-if __name__ == "__main__":
-    main()
+main()

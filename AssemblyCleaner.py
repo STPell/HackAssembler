@@ -11,6 +11,7 @@
              _strip_whitespace
              test_module
              remove_psuedoinstructions
+             remove_space
 """
 
 COMMENT_INDICATOR = "//"
@@ -53,6 +54,12 @@ def remove_psuedoinstructions(file_contents):
     """Removes all Psuedoinstruction from file"""
     return [line for line in file_contents if not line.startswith(
                                     PSUEDOINSTRUCTION_INDICATOR)]
+
+
+def remove_space(line):
+    """Removes all spaces from a line"""
+    split_line = line.split()
+    return "".join(split_line)
 
 
 def test_module():
