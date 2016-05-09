@@ -4,7 +4,7 @@
    translate it
    -----------------------------------------------------------------------
    Written by: Samuel Pell 04-05-16 (dd-mm-yy)
-   Changed: 05-05-16 by Samuel Pell
+   Changed: 06-05-16 by Samuel Pell
    -----------------------------------------------------------------------
    Contains: clean_file
              _strip_comments
@@ -39,7 +39,7 @@ def _remove_whitespace(file_contents):
 
 
 def _strip_comments(file_contents):
-    """Strips all the comments from a file"""
+    """Strips all the comments from a passed file"""
     lines_without_comments = []
     for line in file_contents:
         comment_position = line.find(COMMENT_INDICATOR)
@@ -51,13 +51,13 @@ def _strip_comments(file_contents):
 
 
 def remove_psuedoinstructions(file_contents):
-    """Removes all Psuedoinstruction from file"""
+    """Removes all Psuedoinstruction from a passed file"""
     return [line for line in file_contents if not line.startswith(
                                     PSUEDOINSTRUCTION_INDICATOR)]
 
 
 def remove_space(line):
-    """Removes all spaces from a line"""
+    """Removes all spaces from a passed line and returns it"""
     split_line = line.split()
     return "".join(split_line)
 

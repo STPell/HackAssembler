@@ -132,10 +132,10 @@ def _translate_C_instruction(instruction):
     rhs_indicator = cleaned_instruction.find(SIDE_DELIM)
     if rhs_indicator == -1:
         command, jump = cleaned_instruction.split(JUMP_DELIM)
-        return _command_to_bin(command, "null", jump)
+        return _command_to_bin(command, jump=jump)
     else:
-        dest, command = cleaned_instruction.split(SIDE_DELIM)
-        return _command_to_bin(command, dest)
+        destination, command = cleaned_instruction.split(SIDE_DELIM)
+        return _command_to_bin(command, dest=destination)
     
 
 def _dec_to_bin(number):
@@ -145,11 +145,12 @@ def _dec_to_bin(number):
     return padding + converted_number
 
 
-def _command_to_bin(command, dest, jump="null"):
+def _command_to_bin(command, dest="null", jump="null"):
     """
        Turns a C instruction (command and dest sections) 
-       into its binary equivalent. If jump is not passed
-       to the function it defaults to it's null codes.
+       into its binary equivalent. If jump or dest is not 
+       passed to the function it defaults to their 
+       respective null codes.
     """
     conc_command = COMMAND_TABLE[command] + DEST_TABLE[dest]
     return "111" + conc_command + JUMP_TABLE[jump]
