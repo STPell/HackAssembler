@@ -3,6 +3,7 @@
    Data Structure for the symbol table for a HACK assembler.
    -----------------------------------------------------------------------
    Written by: Samuel Pell 5-05-16 (dd-mm-yy)
+   Changed: 10-05-16 by Samuel Pell 
    -----------------------------------------------------------------------
    contains: SymbolTable
 """
@@ -17,10 +18,10 @@ DEFAULT_SYMBOL_TABLE = {
                        }
 VAR_START_ADDRESS = 16
 
-class SymbolTable(dict):
+class SymbolTable():
     """
        A data structure to use for a Symbol Table designed for a HACK
-       language translator. Based on the dictionary data structure
+       language translator.
        
        Methods: __init__
                 __setitem__
@@ -41,9 +42,6 @@ class SymbolTable(dict):
         
     def _add_symbol(self, symbol, address):
         """Adds a symbol to the table, if it does not already exist"""
-        if symbol in self.symbols:
-            return None
-        
         if address is None:
             address = self.var_assigned + VAR_START_ADDRESS
             self.var_assigned += 1
@@ -57,7 +55,10 @@ class SymbolTable(dict):
            Takes a symbol and an address which is either an integer 
            or None.
         """
-        self._add_symbol(symbol, address)
+        if symbol in self.symbols:
+            return None        
+        else:
+            self._add_symbol(symbol, address)
         
         
     def __getitem__(self, symbol):
